@@ -1,12 +1,11 @@
-import { createContext, useContext } from "react";
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AppContext, CreateUserContext } from "../CreateUserContext";
-import AnotherPage from "./AnotherPage";
 
-export default function Profile( props ){
+
+export default function Profile(  ){
 
     const location = useLocation();
-    const { data } = props;
     const egg = useContext( AppContext );
     console.log( egg );
     return (

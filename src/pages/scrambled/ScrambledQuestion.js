@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import AuthHeader from "../../components/AuthHeader";
 import useHttp from "../../hooks/useHttp";
@@ -19,7 +19,7 @@ export default function ScrambledQuestion(){
         }
         fetchQuestions();
 
-    },[]);
+    });
 
     return (
         <>

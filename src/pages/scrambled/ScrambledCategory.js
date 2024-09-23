@@ -18,7 +18,7 @@ export default function ScrambledCategory(){
         }
         fetchCategories();
 
-    },[]);
+    });
 
     return (
         <div className="App">
@@ -37,7 +37,7 @@ export default function ScrambledCategory(){
                         {
                             categories.map( ({category_name,category_id})=>{
                                 const link = `/scrambled/category/questions/${category_id}/${category_name}`;
-                                return (<li><a href={link}>{category_name}</a></li>)
+                                return (<li><Link to={link}>{category_name}</Link></li>)
                             }
                                 
                             )

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "../../components/Button";
 import useHttp from "../../hooks/useHttp";
 import { useState } from "react";

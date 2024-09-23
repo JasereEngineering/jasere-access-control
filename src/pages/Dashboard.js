@@ -13,11 +13,11 @@ export default function Dashboard(){
             <p>Welcome to the admin control panel. Manage users, roles, and system settings with ease.</p>
             <nav class="nav">
                 <ul>
-                    <li><a href="/dashboard/scrambled/categories">Scrambled Words</a></li>
-                    <li><a href="#">Lemon</a></li>
-                    <li><a href="#">Role Management</a></li>
-                    <li><a href="#">System Settings</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><Link to="/dashboard/scrambled/categories">Scrambled Words</Link></li>
+                    <li><Link to="#">Lemon</Link></li>
+                    <li><Link to="#">Role Management</Link></li>
+                    <li><Link to="#">System Settings</Link></li>
+                    <li><Link to="#">Logout</Link></li>
                 </ul>
             </nav>
         </div>
