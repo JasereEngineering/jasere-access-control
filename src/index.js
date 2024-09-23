@@ -1,13 +1,38 @@
+//import * as dotenv from 'dotenv';
+//dotenv.config();
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import AnotherPage from './pages/AnotherPage';
+import Dashboard from './pages/Dashboard';
+import ScrambledCategory from './pages/scrambled/ScrambledCategory';
+import ScrambledQuestion from './pages/scrambled/ScrambledQuestion';
+import ScrambledAddQuestion from './pages/scrambled/ScrambledAddQuestion';
+import ScrambledAddCategory from './pages/scrambled/ScrambledAddCategory';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      
+      <Router>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/another" element={<AnotherPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/scrambled/categories" element={<ScrambledCategory />} />
+      <Route path="/scrambled/category/questions/:category_id/:category_name" element={<ScrambledQuestion />} />
+      <Route path="/scrambled/category/question/add/:category_id/:category_name" element={<ScrambledAddQuestion />} />
+      <Route path="/scrambled/category/create" element={<ScrambledAddCategory />} />
+    </Routes>
+  </Router>
   </React.StrictMode>
 );
 
