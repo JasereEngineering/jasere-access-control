@@ -22,6 +22,8 @@ export default function ScrambledCategory(){
 
     },[fetchCategories]);
 
+    console.log( categories );
+
 
     return (
         <div className="App">

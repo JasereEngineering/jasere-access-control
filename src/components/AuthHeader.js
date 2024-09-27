@@ -5,8 +5,8 @@ export default function AuthHeader(){
     const {username} = parseUser || {};
     return (
         <>
-            <header class="header">
-        <div class="container">
+            <header className="header">
+        <div className="container">
             <h1>Welcome, {username}</h1>
         </div>
     </header>

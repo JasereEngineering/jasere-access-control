@@ -10,7 +10,7 @@ export default function ScrambledQuestion(){
     const [loading,setLoading] = useState(true);
     const { get } = useHttp(`game/questions/${category_id}`,{loadMessage:'',loadedMessage:''});
     const [questions,setQuestions] = useState([]);
-
+    const [loadingMessage,setLoadingMessage] = useState("Delete");
     const fetchQuestions = useCallback(async() => {
         const questions = await get();    
         setLoading(false);    
@@ -22,15 +22,49 @@ export default function ScrambledQuestion(){
         fetchQuestions();
     },[fetchQuestions]);
 
-    console.log("testing");
+
+    const deleteQuestion = async (id) => {
+        const confirm = window.confirm( `Are you sure you want to delete this trivia?` );
+        if( !confirm ) return;
+        const BASE_URL = process.env.REACT_APP_ACCESS_CONTROL_API_URL || "";
+        const endpoint = `game/question/delete/${id}`;
+        const put = async (payload) => {
+            setLoadingMessage( "Deleting.." );
+            try{
+              const url = `${BASE_URL}${endpoint}` || "";
+              const response = await fetch(url, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(payload),
+            });
+      
+            const result = await response.json();
+            const {message} = result;
+            if( !response.ok ) throw new Error( message );
+            return result;
+      
+            }
+            catch(e){
+            }
+            finally{
+            //   setLoading( false);
+            //   setLoadingMessage( loadMessage );
+            setLoadingMessage( "Delete" );
+            }
+          
+        }
+        const result = await put({isActive:false});
+        if( !result ) alert(`error occurred in deleting trivia. `);
+        else alert( `trivia has been deleted successfully. refresh page to see the changes. `);
+
+    }
 
     return (
         <>
             <div className="App">
-            
                 <section className="hero">
-            
-
                     <div className="container">
                     <AuthHeader />
                     <p>Welcome to Scrambled Words Setup. Here you can manage categories and questions regarding scrambled words</p>
@@ -47,23 +81,25 @@ loading ? (<label>Loading Questions</label>): ( <table>
     <thead>
         <tr>
             <th>#</th>
+            <th>DIFFICULTY</th>
             <th>Question</th>
             <th>Hint</th>
-            <th>ANSWER</th>
+            <th>ANSWER</th>       
             <th></th>
         </tr>
     </thead>
     <tbody>
     {
-        questions.map( ({id,question,answer,hint},index)=>{
+        questions.map( ({id,question,answer,hint,difficulty_level},index)=>{
             return ( <tr key={id}>
                 <td>{index+1}</td>
+                <td>{difficulty_level.toUpperCase()}</td>
                 <td>{question}</td>
                 <td>{hint}</td>
                 <td>{answer.toUpperCase()}</td>
                 <td>
-                    <p><Button name="Edit" /></p>
-                    <p><Button name="Delete" /></p>
+                    <p><Button name="Edit" onClick={ ()=>navigate(`/scrambled/question/edit/${id}`) } /></p>
+                    <p><Button name={loadingMessage} onClick={ () => deleteQuestion(id) } /></p>
                 </td>
             </tr>)
         }

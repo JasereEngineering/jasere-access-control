@@ -23,8 +23,8 @@ export default function ScrambledAddCategory(){
         
 <AuthHeader />
 
-    <section class="hero">
-        <div class="container">
+    <section className="hero">
+        <div className="container">
             <p>Welcome to Scrambled Words Setup. Here you can manage categories and questions regarding scrambled words</p>
             <h3>Create Category</h3>
             <div>
