@@ -84,19 +84,21 @@ loading ? (<label>Loading Questions</label>): ( <table>
             <th>DIFFICULTY</th>
             <th>Question</th>
             <th>Hint</th>
-            <th>ANSWER</th>       
+            <th>ANSWER</th> 
+            <th>TIME</th>      
             <th></th>
         </tr>
     </thead>
     <tbody>
     {
-        questions.map( ({id,question,answer,hint,difficulty_level},index)=>{
+        questions.map( ({id,question,answer,hint,difficulty_level,time},index)=>{
             return ( <tr key={id}>
                 <td>{index+1}</td>
                 <td>{difficulty_level.toUpperCase()}</td>
                 <td>{question}</td>
                 <td>{hint}</td>
                 <td>{answer.toUpperCase()}</td>
+                <td>{time}</td>
                 <td>
                     <p><Button name="Edit" onClick={ ()=>navigate(`/scrambled/question/edit/${id}`) } /></p>
                     <p><Button name={loadingMessage} onClick={ () => deleteQuestion(id) } /></p>

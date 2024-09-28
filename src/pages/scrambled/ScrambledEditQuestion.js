@@ -23,18 +23,20 @@ export default function ScrambledEditQuestion(){
     const [message, setMessage] = useState("");
     const [levels,setLevels] = useState(null);
     const [difficulty_level,setDifficultyLevel] = useState(null);
-
+    const [time_edit,setTimeEdit] = useState(0);
+    
     const fetchQuestion = useCallback(async() => {
         const triviaQuestion = await get(); 
         if( !triviaQuestion ) return;
         const levels = await getLevels();
-        const {question,answer,hint,difficulty_level} = triviaQuestion;
+        const {question,answer,hint,difficulty_level,time} = triviaQuestion;
         setLoading(false);    
         setTrivia({trivia,...triviaQuestion});
         setTriviaEdit( question);
         setAnswerEdit( answer);
         setHintEdit(hint);
         setDifficultyLevel( difficulty_level );
+        setTimeEdit( time );
         setLevels(levels);
         // eslint-disable-next-line react-hooks/exhaustive-deps
       },[]);
@@ -50,7 +52,7 @@ export default function ScrambledEditQuestion(){
         else if( answer_edit === "" ) setMessage("Answer cannot be empty. ");
         else if( hint_edit === "" ) setMessage("Hint cannot be empty. ");
         else{
-          const data = await put({question:trivia_edit,answer:answer_edit,hint:hint_edit,difficulty_level});
+          const data = await put({question:trivia_edit,answer:answer_edit,hint:hint_edit,difficulty_level,time:time_edit});
           if( !data ) return;
           setMessage(`Question has been edited and saved successfully. `);
         }
@@ -89,6 +91,11 @@ export default function ScrambledEditQuestion(){
                     <div className="input-group">
                         <label htmlFor="hint">Hint?</label>
                         <input type="text" value={hint_edit} onChange={(e)=>setHintEdit(e.target.value)} />
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="hint">Time?</label>
+                        <input type="number" value={time_edit} onChange={(e)=>setTimeEdit(e.target.value)} />
                     </div>
                     
                     <div className="input-group">

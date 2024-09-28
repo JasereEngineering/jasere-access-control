@@ -14,8 +14,7 @@ export default function ScrambledAddQuestion(){
     const [message, setMessage] = useState("");
     const [difficulty_level,setDifficultyLevel] = useState(null);
     const [levels,setLevels] = useState([]);
-
-
+    const [time,setTime] = useState(0);
 
     const handleQuestionCreation = async(e) => {
         e.preventDefault();
@@ -25,7 +24,7 @@ export default function ScrambledAddQuestion(){
         else if( hint === "" ) setMessage("Hint cannot be empty. ");
             
         else{
-          const data = await post({category_id,question,answer,hint,difficulty_level});
+          const data = await post({category_id,question,answer,hint,difficulty_level,time});
           if( !data ) return;
           setMessage(`Question has been created successfully. `);
         }
@@ -80,6 +79,11 @@ export default function ScrambledAddQuestion(){
             <div className="input-group">
                 <label htmlFor="hint">Hint?</label>
                 <input type="text" value={hint} onChange={(e)=>setHint(e.target.value)} />
+            </div>
+
+            <div className="input-group">
+                <label htmlFor="hint">Time?</label>
+                <input type="number" value={time} onChange={(e)=>setTime(e.target.value)} />
             </div>
 
             <div className="input-group">
