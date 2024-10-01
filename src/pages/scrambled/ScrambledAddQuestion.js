@@ -21,7 +21,7 @@ export default function ScrambledAddQuestion(){
         if( difficulty_level === "" ) setMessage("Please choose a difficulty level. ");
         else if( question === "" ) setMessage("Question cannot be empty. ");
         else if( answer === "" ) setMessage("Answer cannot be empty. ");
-        else if( hint === "" ) setMessage("Hint cannot be empty. ");
+        // else if( hint === "" ) setMessage("Hint cannot be empty. ");
             
         else{
           const data = await post({category_id,question,answer,hint,difficulty_level,time});
