@@ -14,6 +14,7 @@ export default function Dashboard(){
             <nav class="nav">
                 <ul>
                     <li><Link to="/dashboard/scrambled/categories">Scrambled Words</Link></li>
+                    <li><Link to="/dashboard/correct/categories">Correct!</Link></li>
                     <li><Link to="#">Lemon</Link></li>
                     <li><Link to="#">Role Management</Link></li>
                     <li><Link to="#">System Settings</Link></li>

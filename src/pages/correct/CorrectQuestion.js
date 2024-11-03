@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import AuthHeader from "../../components/AuthHeader";
 import useHttp from "../../hooks/useHttp";
 import { useCallback, useEffect, useState } from "react";
-export default function ScrambledQuestion(){
+export default function CorrectQuestion(){
 
     const navigate = useNavigate(); 
     const {category_id,category_name} = useParams();
@@ -12,7 +12,8 @@ export default function ScrambledQuestion(){
     const [questions,setQuestions] = useState([]);
     const [loadingMessage,setLoadingMessage] = useState("Delete");
     const fetchQuestions = useCallback(async() => {
-        const questions = await get();    
+        const questions = await get();
+        console.log( questions );    
         setLoading(false);    
         setQuestions(questions);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,9 +68,9 @@ export default function ScrambledQuestion(){
                 <section className="hero">
                     <div className="container">
                     <AuthHeader />
-                    <p>Welcome to Scrambled Words Setup. Here you can manage categories and questions regarding scrambled words</p>
+                    <p>Welcome to Correct Setup. Here you can manage categories and questions regarding scrambled words</p>
                         <h3>{category_name} - Manage Questions</h3>
-                        <Button name="(+) Add Question" onClick={()=>navigate(`/scrambled/category/question/add/${category_id}/${category_name}`)}  />
+                        <Button name="(+) Add Question" onClick={()=>navigate(`/correct/category/question/add/${category_id}/${category_name}`)}  />
                     
                     </div>
                 </section>
@@ -83,7 +84,8 @@ loading ? (<label>Loading Questions</label>): ( <table>
             <th>#</th>
             <th>DIFFICULTY</th>
             <th>Question</th>
-            <th>Hint</th>
+            <th>Question Type</th>
+            <th>URL</th>
             <th>ANSWER</th> 
             <th>TIME</th>      
             <th></th>
@@ -91,16 +93,22 @@ loading ? (<label>Loading Questions</label>): ( <table>
     </thead>
     <tbody>
     {
-        questions.map( ({id,question,answer,hint,difficulty_level,time},index)=>{
+        questions.map( ({id,question,answer,difficulty_level,time,question_type,asset_uri},index)=>{
+            console.log(asset_uri);
             return ( <tr key={id}>
                 <td>{index+1}</td>
                 <td>{difficulty_level.toUpperCase()}</td>
                 <td>{question}</td>
-                <td>{hint}</td>
-                <td>{answer?.toUpperCase()}</td>
+                <td>{ question_type.toUpperCase() }</td>
+                <td><a href={asset_uri} target="_blank" rel="noreferrer">Click here to view</a></td>
+                <td>{answer.toUpperCase()}</td>
                 <td>{time}</td>
                 <td>
-                    <p><Button name="Edit" onClick={ ()=>navigate(`/scrambled/question/edit/${id}`) } /></p>
+                    <p><Button name="Edit" onClick={ ()=>{
+                        alert("coming soon");
+                        //navigate(`/correct/question/edit/${id}`) 
+                        
+                        }} /></p>
                     <p><Button name={loadingMessage} onClick={ () => deleteQuestion(id) } /></p>
                 </td>
             </tr>)

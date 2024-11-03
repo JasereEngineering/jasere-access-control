@@ -13,20 +13,31 @@ function useHttp (endpoint,componentLoadingMessage) {
       setError(null);
 
       try{
+        const isFormData =   payload instanceof FormData;
         const url = `${BASE_URL}${endpoint}` || "";
-        const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+        let postPayload;
+        if( !isFormData ){
+          postPayload = {
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json',
+            }, 
+            body:  JSON.stringify(payload)
+          }
+        }
+        else{
+          postPayload = {
+            method: 'POST',
+            body:  payload
+          }          
+        }
 
-      const result = await response.json();
-      const {message} = result;
-      if( !response.ok ) throw new Error( message );
+        const response = await fetch(url, postPayload);
+        const result = await response.json();
+        const {message} = result;
+        if( !response.ok ) throw new Error( message );
 
-      return result;
+        return result;
 
       }
       catch(e){

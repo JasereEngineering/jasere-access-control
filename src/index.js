@@ -15,6 +15,10 @@ import ScrambledQuestion from './pages/scrambled/ScrambledQuestion';
 import ScrambledAddQuestion from './pages/scrambled/ScrambledAddQuestion';
 import ScrambledAddCategory from './pages/scrambled/ScrambledAddCategory';
 import ScrambledEditQuestion from './pages/scrambled/ScrambledEditQuestion';
+import CorrectCategory from './pages/correct/CorrectCategory';
+import CorrectQuestion from './pages/correct/CorrectQuestion';
+import CorrectAddCategory from './pages/correct/CorrectAddCategory';
+import CorrectAddQuestion from './pages/correct/CorrectAddQuestion';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,6 +37,16 @@ root.render(
       <Route path="/scrambled/category/question/add/:category_id/:category_name" element={<ScrambledAddQuestion />} />
       <Route path="/scrambled/question/edit/:question_id" element={<ScrambledEditQuestion />} />
       <Route path="scrambled/category/create" element={<ScrambledAddCategory />} />
+
+      {/* correct routes */}
+      
+
+      <Route path="/dashboard/correct/categories" element={<CorrectCategory />} />
+      <Route path="/correct/category/questions/:category_id/:category_name" element={<CorrectQuestion />} />
+      <Route path="/correct/category/question/add/:category_id/:category_name" element={<CorrectAddQuestion />} />
+      <Route path="/correct/category/create" element={<CorrectAddCategory />} />
+      
+
     </Routes>
   </Router>
   </React.StrictMode>
