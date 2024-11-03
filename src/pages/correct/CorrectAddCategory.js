@@ -25,7 +25,7 @@ export default function CorrectAddCategory(){
 
     <section className="hero">
         <div className="container">
-            <p>Welcome to Scrambled Words Setup. Here you can manage categories and questions regarding scrambled words</p>
+            <p>Welcome to Correct Category Setup. Here you can manage categories and questions regarding scrambled words</p>
             <h3>Create Category</h3>
             <div>
 
