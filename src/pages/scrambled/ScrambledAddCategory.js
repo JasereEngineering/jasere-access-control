@@ -12,7 +12,7 @@ export default function ScrambledAddCategory(){
         e.preventDefault();
         if( category_name === "" ) setMessage("Category Name cannot be empty. ");
         else{
-          const data = await post({category_name,category_description});
+          const data = await post({category_name,category_description,game_id:1});
           if( !data ) return;
           setMessage(`Category "${category_name}" has been created successfully. `);
         }
