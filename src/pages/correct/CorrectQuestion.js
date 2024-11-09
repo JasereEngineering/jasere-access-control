@@ -87,14 +87,14 @@ loading ? (<label>Loading Questions</label>): ( <table>
             <th>Question Type</th>
             <th>URL</th>
             <th>ANSWER</th> 
+            <th>OPTIONS</th>
             <th>TIME</th>      
             <th></th>
         </tr>
     </thead>
     <tbody>
     {
-        questions.map( ({id,question,answer,difficulty_level,time,question_type,asset_uri},index)=>{
-            console.log(asset_uri);
+        questions.map( ({id,question,answer,difficulty_level,time,question_type,asset_uri,options},index)=>{
             return ( <tr key={id}>
                 <td>{index+1}</td>
                 <td>{difficulty_level.toUpperCase()}</td>
@@ -102,12 +102,15 @@ loading ? (<label>Loading Questions</label>): ( <table>
                 <td>{ question_type.toUpperCase() }</td>
                 <td><a href={asset_uri} target="_blank" rel="noreferrer">Click here to view</a></td>
                 <td>{answer.toUpperCase()}</td>
+                <td> 
+                    { 
+                        JSON.parse(options).map((option,index)=> <p>Option {index+1} - { option } </p> )
+                    }
+                </td>
                 <td>{time}</td>
                 <td>
                     <p><Button name="Edit" onClick={ ()=>{
-                        alert("coming soon");
-                        //navigate(`/correct/question/edit/${id}`) 
-                        
+                        alert("coming soon");                        
                         }} /></p>
                     <p><Button name={loadingMessage} onClick={ () => deleteQuestion(id) } /></p>
                 </td>

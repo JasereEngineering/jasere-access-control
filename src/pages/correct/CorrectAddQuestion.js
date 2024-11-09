@@ -25,7 +25,7 @@ export default function CorrectAddQuestion(){
         else if( question_type === "" ) setMessage("Please choose a question type. ");
         else if( question === "" ) setMessage("Question cannot be empty. ");
         else if( answer === "" ) setMessage("Answer cannot be empty. ");
-        else if( options.length !== 4 ) setMessage("Number of options must be 4");            
+        else if( options.length !== 4 ) setMessage("Number of options must be 4");           
         else{
 
             const formData = new FormData();
@@ -36,6 +36,7 @@ export default function CorrectAddQuestion(){
             formData.append('answer',answer);
             formData.append('options',JSON.stringify(options));
             formData.append('category_id',category_id);
+            formData.append('time',time);
 
             const data = await post(formData);
             if( !data ) return;
